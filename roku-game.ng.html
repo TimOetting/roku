@@ -1,0 +1,10 @@
+<div class="container">
+  <header>
+    <h1>Todo List</h1>
+  </header>
+ 
+  <ul ng-repeat="game in games">
+    <li>{{game.activePlayer}}</li>
+  </ul>
+  <button ng-click="newGame('johnny')">neues Game</button>
+</div>
