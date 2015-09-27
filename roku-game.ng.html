@@ -1,4 +1,5 @@
 <div class="game-board">
+  <button class="startGameButton" ng-click="newGame()"></button>
   <div ng-repeat="(gameTokenId, gameToken) in game.board.gameTokens">
     <game-token></game-token>
   </div>

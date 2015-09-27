@@ -30,6 +30,7 @@ body
   // background-image: url('assets/img/gameTokenBase.svg')
   background-size 100%
   position absolute
+  pointer-events none
   &__background
     position absolute
     z-index 2
@@ -42,19 +43,6 @@ body
     left 0
     height 100%
     z-index 2
-  &__clickBoxPanel
-    height $hexaHeight
-    width .5 * $hexaWidth
-    position absolute
-    transform translate(-50%, -50%)
-    top 50%
-    left 50%
-    background-color: $background-color
-    // z-index: -1
-    &--60
-      transform translate(-50%, -50%) rotate(60deg)
-    &--120
-      transform translate(-50%, -50%) rotate(120deg)
   &__clickBox
     position absolute
     top 50%
@@ -63,6 +51,20 @@ body
   &__clickBox:hover
     .gameToken__clickBoxPanel
       background-color: darken($background-color, 1%)
+  &__clickBoxPanel
+    height $hexaHeight
+    width .5 * $hexaWidth
+    position absolute
+    transform translate(-50%, -50%)
+    top 50%
+    left 50%
+    background-color: $background-color
+    pointer-events all
+    // z-index: -1
+    &--60
+      transform translate(-50%, -50%) rotate(60deg)
+    &--120
+      transform translate(-50%, -50%) rotate(120deg)
   
   &__weapon
     width 30px
@@ -135,7 +137,10 @@ body
       //ebene 2
       -webkit-filter: drop-shadow(0 3px 6px rgba(0,0,0,0.16)) drop-shadow(0 3px 6px rgba(0,0,0,0.23));
       
-    
+.startGameButton
+  position absolute
+  z-index 100
+  opacity .2
       
     
     
