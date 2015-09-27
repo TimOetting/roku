@@ -22,3 +22,7 @@ coffeescript
 stylus
 mquandalle:jade
 urigo:angular@0.10.2
+meteorhacks:npm
+
+
+npm-container
