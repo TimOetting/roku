@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg class="gameToken__svg-line" version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 300 260" enable-background="new 0 0 300 260" xml:space="preserve">
+<line class="gameToken__svg-line" id="sectorline_5_" opacity="0.5" fill="none" stroke="#5E8DAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="182.1" y1="185.8" x2="223.2" y2="257.2"/>
+<line class="gameToken__svg-line" id="sectorline_4_" opacity="0.5" fill="none" stroke="#5E8DAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="76.9" y1="1.8" x2="118" y2="74.7"/>
+<line class="gameToken__svg-line" id="sectorline_3_" opacity="0.5" fill="none" stroke="#5E8DAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="214" y1="129.5" x2="297" y2="129.5"/>
+<line class="gameToken__svg-line" id="sectorline_1_" opacity="0.5" fill="none" stroke="#5E8DAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="2" y1="129.5" x2="86" y2="129.5"/>
+<line class="gameToken__svg-line" id="sectorline" opacity="0.5" fill="none" stroke="#5E8DAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="181.8" y1="74.5" x2="224" y2="1.5"/>
+<line class="gameToken__svg-line" id="sectorline_2_" opacity="0.5" fill="none" stroke="#5E8DAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="76.2" y1="257.2" x2="117.6" y2="185.5"/>
+<g id="frame">
+	<path fill="#5E8DAA" d="M222.4,3.5L294.9,129l-72.4,125.5H77.6L5.1,129L77.6,3.5H222 M225-0.5H75l-75,130l75,130h150l75-130
+		L225-0.5L225-0.5z"/>
+</g>
+</svg>

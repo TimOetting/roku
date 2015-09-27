@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 60 60" enable-background="new 0 0 60 60" xml:space="preserve">
+<g>
+	
+		<line class="gameToken__svg-line" fill="none" stroke="#5E8DAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="30" y1="6" x2="30" y2="48"></line>
+	
+		<polyline class="gameToken__svg-line" fill="none" stroke="#5E8DAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		23.1,11.8 30,5 36.9,11.8 	"></polyline>
+	
+		<polyline class="gameToken__svg-line" fill="none" stroke="#5E8DAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		23.1,55.2 30,48.3 36.9,55.2 	"></polyline>
+	
+		<polyline class="gameToken__svg-line" fill="none" stroke="#5E8DAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		23.1,46.5 30,39.6 36.9,46.5 	"></polyline>
+</g>
+</svg>

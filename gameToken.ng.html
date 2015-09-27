@@ -1,0 +1,46 @@
+<div class="gameToken gameToken--player-{{gameToken.playerId}}" ng-class="{ 'gameToken--selected': gameToken.selected}" style="transform: translate({{pixPos.x}}px, {{pixPos.y}}px)">
+  <div class="gameToken__background">
+    <!-- <game-token-base-svg></game-token-base-svg> -->
+    <!-- <img class="gameToken__background-img" src="assets/img/gameTokenBase.svg" alt=""> -->
+    <game-token-base-svg></game-token-base-svg>
+  </div>
+  <div class="gameToken__clickBox" ng-click="selectGameToken(gameTokenId)">
+    <div class="gameToken__clickBoxPanel"></div>
+    <div class="gameToken__clickBoxPanel gameToken__clickBoxPanel--60"></div>
+    <div class="gameToken__clickBoxPanel gameToken__clickBoxPanel--120"></div>
+  </div>
+  <div class="gameToken__weapons">
+    <div class="gameToken__weapon gameToken__weapon--sword">
+      <game-token-weapon-sword-svg></game-token-weapon-sword-svg>
+    </div>
+
+    <div class="gameToken__weapon gameToken__weapon--sword gameToken__weapon--60">
+      <game-token-weapon-sword-svg></game-token-weapon-sword-svg>
+    </div>
+
+    <div class="gameToken__weapon gameToken__weapon--arrow gameToken__weapon--120">
+      <game-token-weapon-arrow-svg></game-token-weapon-arrow-svg>
+    </div>
+      
+    <div class="gameToken__weapon gameToken__weapon--arrow gameToken__weapon--180">
+      <game-token-weapon-arrow-svg></game-token-weapon-arrow-svg>
+    </div>
+      
+    <div class="gameToken__weapon gameToken__weapon--shield gameToken__weapon--240">
+      <game-token-weapon-shield-svg></game-token-weapon-shield-svg>
+    </div>
+
+    <div class="gameToken__weapon gameToken__weapon--shield gameToken__weapon--300">
+      <game-token-weapon-shield-svg></game-token-weapon-shield-svg>
+    </div>
+  </div>
+  <div class="gameToken__health-points">
+    {{gameToken.position.x}} {{gameToken.position.y}} {{playerId}} 
+  </div>
+  <div class="gameToken__shadow">
+    <img class="gameToken__shadow-img gameToken__shadow-img" src="assets/img/hexShadow.svg" alt="">
+  </div>
+</div>
+
+
+

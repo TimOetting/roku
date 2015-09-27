@@ -1,2 +1,141 @@
+$hexaWidth = 150px
+$hexaHeight = $hexaWidth * 0.8660
+
+$background-color = #fffdfa
+
+$player-1-color = #5e8daa
+$player-2-color = #d36a6a
+
 h1
   color: red
+  
+body
+  font-family 'Helvetica Neue'
+
+.game-board
+  background-image: url('assets/img/gameGrid.svg')
+  background-size: $hexaWidth*1.5 $hexaHeight
+  width 2000px
+  height 2000px
+  
+.board-action-button
+  width $hexaWidth
+  height $hexaHeight
+  position absolute
+  z-index 20
+
+.gameToken
+  width $hexaWidth
+  height $hexaHeight
+  // background-image: url('assets/img/gameTokenBase.svg')
+  background-size 100%
+  position absolute
+  &__background
+    position absolute
+    z-index 2
+    height 100%
+    width 100%
+    pointer-events none
+  &__background-img
+    position absolute
+    top 0
+    left 0
+    height 100%
+    z-index 2
+  &__clickBoxPanel
+    height $hexaHeight
+    width .5 * $hexaWidth
+    position absolute
+    transform translate(-50%, -50%)
+    top 50%
+    left 50%
+    background-color: $background-color
+    // z-index: -1
+    &--60
+      transform translate(-50%, -50%) rotate(60deg)
+    &--120
+      transform translate(-50%, -50%) rotate(120deg)
+  &__clickBox
+    position absolute
+    top 50%
+    left 50%
+    z-index 1
+  &__clickBox:hover
+    .gameToken__clickBoxPanel
+      background-color: darken($background-color, 1%)
+  
+  &__weapon
+    width 30px
+    height 30px
+    position absolute
+    transform translate(-50%, -55px)
+    top 50%
+    left 50%
+    transform-origin: 0% 0%
+    pointer-events none
+    z-index 3
+    &--60
+      transform rotate(60deg) translate(-50%, -55px) 
+    &--120
+      transform rotate(120deg) translate(-50%, -55px) 
+    &--180
+      transform rotate(180deg) translate(-50%, -55px) 
+    &--240
+      transform rotate(240deg) translate(-50%, -55px) 
+    &--300
+      transform rotate(300deg) translate(-50%, -55px) 
+  &__health-points
+    position absolute
+    transform translate(-50%, -50%)
+    top 50%
+    left 50%
+    z-index 3
+    pointer-events none
+  &__shadow
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    pointer-events none
+  &__shadow-img
+    -webkit-filter: drop-shadow(0 0 0 rgba(0,0,0,0.07)) drop-shadow(0 0 0 rgba(0,0,0,0.26));
+    transition .1s -webkit-filter ease-in, .1s -webkit-filter ease-in
+    
+  &__shadow-img--1
+    // 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+    -webkit-filter: drop-shadow(0 1px 3px rgba(0,0,0,0.12)) drop-shadow(0 1px 2px rgba(0,0,0,0.24));
+  &__shadow-img--2
+    // 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+    -webkit-filter: drop-shadow(0 3px 6px rgba(0,0,0,0.16)) drop-shadow(0 3px 6px rgba(0,0,0,0.23));
+  &__shadow-img--3
+    // 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+    -webkit-filter: drop-shadow(0 10px 20px rgba(0,0,0,0.19)) drop-shadow(0 6px 6px rgba(0,0,0,0.23));
+  &__shadow-img--4
+    // 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+    -webkit-filter: drop-shadow(0 14px 28px rgba(0,0,0,0.25)) drop-shadow(0 10px 10px rgba(0,0,0,0.22));
+  &__shadow-img--5
+    // 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)
+    -webkit-filter: drop-shadow(0 19px 38px rgba(0,0,0,0.30)) drop-shadow(0 15px 12px rgba(0,0,0,0.22));
+    // box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  &--player-1 
+    .gameToken__svg-line
+      stroke $player-1-color
+    .gameToken__svg-path
+      fill $player-1-color
+  &--player-2 
+    .gameToken__svg-line
+      stroke $player-2-color
+    .gameToken__svg-path
+      fill $player-2-color
+  &--selected
+    z-index 10
+    .gameToken__shadow-img
+      //ebene 2
+      -webkit-filter: drop-shadow(0 3px 6px rgba(0,0,0,0.16)) drop-shadow(0 3px 6px rgba(0,0,0,0.23));
+      
+    
+      
+    
+    
