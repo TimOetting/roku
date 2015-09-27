@@ -14,6 +14,9 @@ if Meteor.isClient
     '$meteor'
     ($scope, $meteor) ->
       $scope.games = $meteor.collection(Games);
+      console.log '$scope.games'
+      console.log $scope.games
+
       $scope.possibleMovesClass = 
         getArrowAttacks: () ->
           [
@@ -150,20 +153,9 @@ hexPosToPixel = (pos) ->
 
 Meteor.methods
   newGame: (id) ->
-    Games.insert
-      id: id
-      activePlayer: 0
-      board: {}
-      players: []
-    return
-
-class GameToken
-  constructor: (@id) ->
-  id: 0
-  position: 
-    x: 3
-    y: 5
-
-
-class 
+    console.log '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>game'
+    RokuGame = Meteor.npmRequire('roku-game')
+    game = RokuGame.createNewGame()
+    console.log game
+    Games.insert game
 
