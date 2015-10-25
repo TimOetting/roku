@@ -1,7 +1,8 @@
 $hexaWidth = 150px
 $hexaHeight = $hexaWidth * 0.8660
 
-$background-color = #fffdfa
+$game-tile-bg = #fffdfa
+$background-color = #F3F2EF
 
 $player-1-color = #5e8daa
 $player-2-color = #d36a6a
@@ -10,13 +11,14 @@ h1
   color: red
   
 body
-  font-family 'Helvetica Neue'
+  font-family 'Bariol'
 
 .game-board
   background-image: url('assets/img/gameGrid.svg')
   background-size: $hexaWidth*1.5 $hexaHeight
   width 2000px
   height 2000px
+  background-color $background-color
   
 .board-action-button
   width $hexaWidth
@@ -31,6 +33,7 @@ body
   background-size 100%
   position absolute
   pointer-events none
+  transition transform 1s ease
   &__background
     position absolute
     z-index 2
@@ -50,7 +53,7 @@ body
     z-index 1
   &__clickBox:hover
     .gameToken__clickBoxPanel
-      background-color: darken($background-color, 1%)
+      background-color: lighten($game-tile-bg, 50%)
   &__clickBoxPanel
     height $hexaHeight
     width .5 * $hexaWidth
@@ -58,7 +61,7 @@ body
     transform translate(-50%, -50%)
     top 50%
     left 50%
-    background-color: $background-color
+    background-color: $game-tile-bg
     pointer-events all
     // z-index: -1
     &--60
@@ -70,22 +73,22 @@ body
     width 30px
     height 30px
     position absolute
-    transform translate(-50%, -55px)
+    transform translate(-50%, -57px)
     top 50%
     left 50%
     transform-origin: 0% 0%
     pointer-events none
     z-index 3
-    &--60
-      transform rotate(60deg) translate(-50%, -55px) 
-    &--120
-      transform rotate(120deg) translate(-50%, -55px) 
-    &--180
-      transform rotate(180deg) translate(-50%, -55px) 
-    &--240
-      transform rotate(240deg) translate(-50%, -55px) 
-    &--300
-      transform rotate(300deg) translate(-50%, -55px) 
+    &--60deg
+      transform rotate(60deg) translate(-50%, -57px) 
+    &--120deg
+      transform rotate(120deg) translate(-50%, -57px) 
+    &--180deg
+      transform rotate(180deg) translate(-50%, -57px) 
+    &--240deg
+      transform rotate(240deg) translate(-50%, -57px) 
+    &--300deg
+      transform rotate(300deg) translate(-50%, -57px) 
   &__health-points
     position absolute
     transform translate(-50%, -50%)
@@ -93,6 +96,18 @@ body
     left 50%
     z-index 3
     pointer-events none
+    font-size 18px
+    
+    height 36px
+    width 36px
+    text-align center
+    background-color #d36a6a
+    border-radius 50%
+    color white
+    line-height 36px
+    padding-top 1px
+    box-sizing border-box
+    
   &__shadow
     position: absolute;
     top: 0;
@@ -103,7 +118,7 @@ body
     pointer-events none
   &__shadow-img
     -webkit-filter: drop-shadow(0 0 0 rgba(0,0,0,0.07)) drop-shadow(0 0 0 rgba(0,0,0,0.26));
-    transition .1s -webkit-filter ease-in, .1s -webkit-filter ease-in
+    // transition .5s -webkit-filter ease
     
   &__shadow-img--1
     // 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
@@ -126,16 +141,38 @@ body
       stroke $player-1-color
     .gameToken__svg-path
       fill $player-1-color
+    .gameToken__health-points
+      background-color $player-1-color
   &--player-2 
     .gameToken__svg-line
       stroke $player-2-color
     .gameToken__svg-path
       fill $player-2-color
-  &--selected
+    .gameToken__health-points
+      background-color $player-2-color
+  &:hover
     z-index 10
+  &--player-1:hover
+    .gameToken__svg-line
+      stroke darken($player-1-color, 16%)
+    .gameToken__svg-path
+      fill darken($player-1-color, 16%)
+    .gameToken__health-points
+      background-color darken($player-1-color, 16%)
+  &--player-2:hover
+    .gameToken__svg-line
+      stroke darken($player-2-color, 16%)
+    .gameToken__svg-path
+      fill darken($player-2-color, 16%)
+    .gameToken__health-points
+      background-color darken($player-2-color, 16%)
+  &--selected, &--selected:hover
+    z-index 11
     .gameToken__shadow-img
       //ebene 2
-      -webkit-filter: drop-shadow(0 3px 6px rgba(0,0,0,0.16)) drop-shadow(0 3px 6px rgba(0,0,0,0.23));
+      // -webkit-filter: drop-shadow(0 3px 6px rgba(0,0,0,0.32)) drop-shadow(0 3px 6px rgba(0,0,0,0.46));
+      -webkit-filter: drop-shadow(0 20px 20px rgba(0,0,0,0.19)) drop-shadow(0 16px 6px rgba(0,0,0,0.23));
+      // transition .1s -webkit-filter ease
       
 .startGameButton
   position absolute

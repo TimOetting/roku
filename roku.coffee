@@ -1,6 +1,5 @@
 onReady = ->
   angular.bootstrap document, [ 'roku-app' ]
-  return
 
 Games = new (Mongo.Collection)('games')
 if Meteor.isClient
@@ -14,78 +13,11 @@ if Meteor.isClient
     '$meteor'
     '$timeout'
     ($scope, $meteor, $timeout) ->
-
-      $scope.possibleMovesClass = 
-        getArrowAttacks: () ->
-          [
-            # {position:
-            #   x: 4
-            #   y: 3}
-            # {position:
-            #   x: 3
-            #   y: 2}
-          ]
-        getSwordAttacks: () ->
-          [
-            # {position:
-            #   x: 2
-            #   y: 2}
-            # {position:
-            #   x: 3
-            #   y: 3}
-          ]
-        getMoves: () ->
-          [
-            {position:
-              x: 2
-              y: 1}
-            {position:
-              x: 1
-              y: 1}
-            {position:
-              x: 0
-              y: 1}
-          ]
-      $scope.possibleMoves = 
-        arrowAttacks: $scope.possibleMovesClass.getArrowAttacks()
-        swordAttacks: $scope.possibleMovesClass.getSwordAttacks()
-        moves: $scope.possibleMovesClass.getMoves()
-      # $scope.game = $meteor.call 'getLastGame'
+      $scope.selectedGameTokenId = {}
+      $scope.possibleMoves = {}
       $scope.games = $meteor.collection(Games);
       $scope.game = {}
-      # $scope.game = 
-      #   activePlayer: 0
-      #   board:
-      #     gameTokens: [
-      #       {
-      #         position:
-      #           x: 0
-      #           y: 0
-      #         playerId: 2
-      #         health: 6
-      #       }
-      #       {
-      #         position:
-      #           x: 0
-      #           y: 1
-      #         playerId: 1
-      #         health: 5
-      #       }
-      #       {
-      #         position:
-      #           x: 1
-      #           y: 0
-      #         playerId: 1
-      #         health: 5
-      #       }
-      #       {
-      #         position:
-      #           x: 2    
-      #           y: 0
-      #         playerId: 1
-      #         health: 5
-      #       }
-      #     ]
+
       console.log '$scope.game'
       console.log $scope.game
 
@@ -94,38 +26,50 @@ if Meteor.isClient
         for token in tokens
           token.selected = false
         tokens[tokenId].selected = true
-        $scope.selectedGameToken
-        console.log $scope.game.board.gameTokens[tokenId].position
-        $scope.possibleMovesClass = $meteor.call 'getPossibleActions', $scope.game, $scope.game.board.gameTokens[tokenId].position
-
-
-      # $scope.attack = (attackerPos, targetPos) ->
-      #   console.log 'attack:'
-      #   console.log attackerPos
-      #   console.log targetPos
+        $scope.selectedGameTokenId = tokenId
+        $meteor.call('getPossibleActions', $scope.game, $scope.game.board.gameTokens[tokenId].position).then(
+          (data) ->
+            $scope.possibleMoves = data
+          ,
+          (err) ->
+            console.log 'failed', err
+        )
 
       $scope.attack = () ->
         console.log 'angriff'
 
-      $scope.move = () ->
-        console.log 'move'
+      $scope.move = (x,y) ->
+        console.log 'move',x,y
+        newPos = 
+          x: x
+          y: y
+        tokens = $scope.game.board.gameTokens
+        tokens[$scope.selectedGameTokenId].position = newPos
+        # tokens[$scope.selectedGameTokenId].pixPos = hexPosToPixel(newPos)
+        $scope.possibleMoves = {}
 
       $scope.newGame = () ->
         $meteor.call 'newGame'
         $scope.game = $scope.games[$scope.games.length - 1]
 
-        return
       $scope.hexPosToPixel = (pos) ->
         hexPosToPixel(pos)
 
+      # $scope.$watch 'game', (neu, old) ->
+      #   console.log 'change game'
+      # , true  
+
+      $scope.$watch 'game.board.gameTokens', (neu, old) ->
+        console.log 'change tokens'
+        console.log neu
+        console.log old
+      , true  
+
       init = () ->
-        # $timeout (() ->
-        #   $scope.game = $scope.games[$scope.games.length - 1]
-        # ), 100)
         $timeout ->
           $scope.game = $scope.games[$scope.games.length - 1]
           console.log $scope.game
-        ,500
+        ,200
 
       init()
   ]).controller('GameTokenCtrl', [
@@ -133,14 +77,40 @@ if Meteor.isClient
     '$meteor'
     ($scope, $meteor) ->
       $scope.pixPos = hexPosToPixel($scope.gameToken.position)
+      # $scope.$apply ->
+      # $scope.pixPos = ->
+      #   posX = 75 * 3/2 * $scope.gameToken.position.x
+      #   posY = 75 * Math.sqrt(3) * $scope.gameToken.position.y
+      #   if (Math.abs($scope.gameToken.position.x) % 2 == 1)
+      #     posY += (75 * Math.sqrt(3)) / 2
+      #   pixPos =
+      #     x: posX
+      #     y: posY
+      # $scope.pixPos = $scope.gameToken.position * 150
+      $scope.gameToken.weapons = []
+      $scope.$watch 'gameToken', (newValue, oldValue) ->
+        console.log 'gameToken Directive change', newValue
+      , true
+      $scope.$watch 'gameToken.position', (newValue, oldValue) ->
+        console.log 'changepos', newValue
+
+        $scope.gameToken.weapons = []
+        # $scope.$apply ->
+        $scope.pixPos = hexPosToPixel($scope.gameToken.position)
+        # $scope.pixPos = $scope.gameToken.position * 150
+        mapSidesToWeapons = ->
+          for side in $scope.gameToken.sides
+            $scope.gameToken.weapons.push 'shield' if side is 0
+            $scope.gameToken.weapons.push 'sword' if side is 1
+            $scope.gameToken.weapons.push 'arrow' if side is 2
+
+        mapSidesToWeapons()
+      , true
+
   ]).directive('gameToken', () ->
     restrict: 'E'
     templateUrl: 'gameToken.ng.html'
-    controller: 'GameTokenCtrl'    
-    # scope:
-    #   hexposx: '='
-    #   hexposy: '='
-    #   playerId: '='
+    controller: 'GameTokenCtrl'
   ).directive('gameTokenBaseSvg', () ->
     restrict: 'E'
     templateUrl: 'gameTokenBaseSvg.ng.html'
@@ -177,15 +147,17 @@ Meteor.methods
   newGame: (id) ->
     RokuGame = Meteor.npmRequire('roku-game')
     game = RokuGame.createNewGame()
-    console.log game
     Games.insert game
   getLastGame: () ->
     lastGame = Games.find({}, {sort: {_id: -1}, limit: 1});
   getPossibleActions: (game, position) ->
-    RokuGame = Meteor.npmRequire('roku-game')
-    possibleActions = RokuGame.getPossibleActions(game, position)
-    console.log 'possibleActions' 
-    console.log possibleActions 
-    return possibleActions
-    # RokuGame.getPossibleActions(game, position)
+    if Meteor.isServer
+      RokuGame = Meteor.npmRequire('roku-game')
+      possibleActions = RokuGame.getPossibleActions(game, position.x, position.y)
+      console.log 'possibleActionso'
+      console.log possibleActions
+      return possibleActions 
+  moveFromTo: (from, to) ->
+    console.log 'someMethod on server'
+      # RokuGame.getPossibleActions(game, position)
 

@@ -1,4 +1,4 @@
-<div class="gameToken gameToken--player-{{gameToken.playerId}}" ng-class="{ 'gameToken--selected': gameToken.selected}" style="transform: translate({{pixPos.x}}px, {{pixPos.y}}px)">
+<div class="gameToken gameToken--player-{{gameToken.playerId}}" x="{{gameToken.position.x}}" y="{{gameToken.position.y}}" ng-class="{ 'gameToken--selected': gameToken.selected}" style="transform: translate({{pixPos.x}}px, {{pixPos.y}}px) scale(.97)">
   <div class="gameToken__background">
     <!-- <game-token-base-svg></game-token-base-svg> -->
     <!-- <img class="gameToken__background-img" src="assets/img/gameTokenBase.svg" alt=""> -->
@@ -10,32 +10,15 @@
     <div class="gameToken__clickBoxPanel gameToken__clickBoxPanel--120"></div>
   </div>
   <div class="gameToken__weapons">
-    <div class="gameToken__weapon gameToken__weapon--sword">
-      <game-token-weapon-sword-svg></game-token-weapon-sword-svg>
+    <div ng-repeat="weapon in gameToken.weapons track by $index" class="gameToken__weapon gameToken__weapon--{{weapon}} gameToken__weapon--{{60 * $index}}deg">
+      <game-token-weapon-sword-svg ng-show="weapon == 'sword'"></game-token-weapon-sword-svg>
+      <game-token-weapon-arrow-svg ng-show="weapon == 'arrow'"></game-token-weapon-arrow-svg>
+      <game-token-weapon-shield-svg ng-show="weapon == 'shield'"></game-token-weapon-shield-svg>
     </div>
 
-    <div class="gameToken__weapon gameToken__weapon--sword gameToken__weapon--60">
-      <game-token-weapon-sword-svg></game-token-weapon-sword-svg>
-    </div>
-
-    <div class="gameToken__weapon gameToken__weapon--arrow gameToken__weapon--120">
-      <game-token-weapon-arrow-svg></game-token-weapon-arrow-svg>
-    </div>
-      
-    <div class="gameToken__weapon gameToken__weapon--arrow gameToken__weapon--180">
-      <game-token-weapon-arrow-svg></game-token-weapon-arrow-svg>
-    </div>
-      
-    <div class="gameToken__weapon gameToken__weapon--shield gameToken__weapon--240">
-      <game-token-weapon-shield-svg></game-token-weapon-shield-svg>
-    </div>
-
-    <div class="gameToken__weapon gameToken__weapon--shield gameToken__weapon--300">
-      <game-token-weapon-shield-svg></game-token-weapon-shield-svg>
-    </div>
   </div>
   <div class="gameToken__health-points">
-    {{gameToken.health}}
+    {{gameToken.health}}<!-- {{gameToken.position.x}} {{gameToken.position.y}} -->
   </div>
   <div class="gameToken__shadow">
     <img class="gameToken__shadow-img gameToken__shadow-img" src="assets/img/hexShadow.svg" alt="">
