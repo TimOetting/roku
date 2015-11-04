@@ -1,15 +1,11 @@
 <div class="game-board">
   <button class="startGameButton" ng-click="newGame()"></button>
   <div ng-repeat="(gameTokenId, gameToken) in game.board.gameTokens">
-    <game-token></game-token>
+    <game-token data-token-id="{{gameTokenId}}"></game-token>
   </div>
-  <div ng-repeat="(actionId, actionPosition) in possibleMoves.arrowAttacks">
-    <ui-arrow-attack-button></ui-arrow-attack-button>
-  </div>
-  <div ng-repeat="(actionId, actionPosition) in possibleMoves.swordAttacks">
-    <ui-sword-attack-button></ui-sword-attack-button>
-  </div>
-  <div ng-repeat="(actionId, actionPosition) in possibleMoves.moves">
-    <ui-move-button></ui-move-button>
-  </div>
+
 </div>
+<div class="console">
+  <p>Active Player: {{game.gameState.activePlayer}}</p>
+  <p>Remaining Moves: {{game.gameState.remainingPlayerTurns}}</p>
+</div>  

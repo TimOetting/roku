@@ -1,27 +1,38 @@
-<div class="gameToken gameToken--player-{{gameToken.playerId}}" x="{{gameToken.position.x}}" y="{{gameToken.position.y}}" ng-class="{ 'gameToken--selected': gameToken.selected}" style="transform: translate({{pixPos.x}}px, {{pixPos.y}}px) scale(.97)">
-  <div class="gameToken__background">
-    <!-- <game-token-base-svg></game-token-base-svg> -->
-    <!-- <img class="gameToken__background-img" src="assets/img/gameTokenBase.svg" alt=""> -->
-    <game-token-base-svg></game-token-base-svg>
-  </div>
-  <div class="gameToken__clickBox" ng-click="selectGameToken(gameTokenId)">
-    <div class="gameToken__clickBoxPanel"></div>
-    <div class="gameToken__clickBoxPanel gameToken__clickBoxPanel--60"></div>
-    <div class="gameToken__clickBoxPanel gameToken__clickBoxPanel--120"></div>
-  </div>
-  <div class="gameToken__weapons">
-    <div ng-repeat="weapon in gameToken.weapons track by $index" class="gameToken__weapon gameToken__weapon--{{weapon}} gameToken__weapon--{{60 * $index}}deg">
-      <game-token-weapon-sword-svg ng-show="weapon == 'sword'"></game-token-weapon-sword-svg>
-      <game-token-weapon-arrow-svg ng-show="weapon == 'arrow'"></game-token-weapon-arrow-svg>
-      <game-token-weapon-shield-svg ng-show="weapon == 'shield'"></game-token-weapon-shield-svg>
+<div class="gameTokenGroup">
+  <div class="gameToken gameToken--player-{{gameToken.playerId}}" x="{{gameToken.position.x}}" y="{{gameToken.position.y}}" ng-class="{ 'gameToken--selected': gameToken.selected}" style="transform: translate({{gameToken.pixPos.x}}px, {{gameToken.pixPos.y}}px) scale(.97)">
+    <div class="gameToken__background">
+      <!-- <game-token-base-svg></game-token-base-svg> -->
+      <!-- <img class="gameToken__background-img" src="assets/img/gameTokenBase.svg" alt=""> -->
+      <game-token-base-svg></game-token-base-svg>
     </div>
+    <div class="gameToken__clickBox" ng-click="selectGameToken(gameTokenId)">
+      <div class="gameToken__clickBoxPanel"></div>
+      <div class="gameToken__clickBoxPanel gameToken__clickBoxPanel--60"></div>
+      <div class="gameToken__clickBoxPanel gameToken__clickBoxPanel--120"></div>
+    </div>
+    <div class="gameToken__weapons">
+      <div ng-repeat="side in gameToken.sides track by $index" class="gameToken__weapon gameToken__weapon--{{side.weaponName}} gameToken__weapon--{{60 * $index}}deg" ng-class="{'gameToken__weapon--not-ready': !side.isReady}">
+        <game-token-weapon-sword-svg ng-show="side.weaponName == 'sword'"></game-token-weapon-sword-svg>
+        <game-token-weapon-arrow-svg ng-show="side.weaponName == 'arrow'"></game-token-weapon-arrow-svg>
+        <game-token-weapon-shield-svg ng-show="side.weaponName == 'shield'"></game-token-weapon-shield-svg>
+      </div>
 
+    </div>
+    <div class="gameToken__health-points">
+      {{gameToken.health}}<!-- {{gameToken.position.x}} {{gameToken.position.y}} -->
+    </div>
+    <div class="gameToken__shadow">
+      <img class="gameToken__shadow-img gameToken__shadow-img" src="assets/img/hexShadow.svg" alt="">
+    </div>
   </div>
-  <div class="gameToken__health-points">
-    {{gameToken.health}}<!-- {{gameToken.position.x}} {{gameToken.position.y}} -->
+  <div ng-show="gameToken.selected" ng-repeat="(actionId, actionPosition) in gameToken.possibleActions.moves">
+    <ui-move-button></ui-move-button>
   </div>
-  <div class="gameToken__shadow">
-    <img class="gameToken__shadow-img gameToken__shadow-img" src="assets/img/hexShadow.svg" alt="">
+  <div ng-show="gameToken.selected" ng-repeat="(attackId, attack) in gameToken.possibleActions.swordAttacks">
+    <ui-sword-attack-button></ui-sword-attack-button>
+  </div>
+  <div ng-show="gameToken.selected" ng-repeat="(attackId, attack) in gameToken.possibleActions.arrowAttacks">
+    <ui-arrow-attack-button></ui-arrow-attack-button>
   </div>
 </div>
 

@@ -89,6 +89,8 @@ body
       transform rotate(240deg) translate(-50%, -57px) 
     &--300deg
       transform rotate(300deg) translate(-50%, -57px) 
+    &--not-ready
+      opacity .3
   &__health-points
     position absolute
     transform translate(-50%, -50%)
@@ -136,14 +138,14 @@ body
     // 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)
     -webkit-filter: drop-shadow(0 19px 38px rgba(0,0,0,0.30)) drop-shadow(0 15px 12px rgba(0,0,0,0.22));
     // box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  &--player-1 
+  &--player-0
     .gameToken__svg-line
       stroke $player-1-color
     .gameToken__svg-path
       fill $player-1-color
     .gameToken__health-points
       background-color $player-1-color
-  &--player-2 
+  &--player-1
     .gameToken__svg-line
       stroke $player-2-color
     .gameToken__svg-path
@@ -152,14 +154,14 @@ body
       background-color $player-2-color
   &:hover
     z-index 10
-  &--player-1:hover
+  &--player-0:hover
     .gameToken__svg-line
       stroke darken($player-1-color, 16%)
     .gameToken__svg-path
       fill darken($player-1-color, 16%)
     .gameToken__health-points
       background-color darken($player-1-color, 16%)
-  &--player-2:hover
+  &--player-1:hover
     .gameToken__svg-line
       stroke darken($player-2-color, 16%)
     .gameToken__svg-path
@@ -178,6 +180,16 @@ body
   position absolute
   z-index 100
   opacity .2
-      
+  
+.console 
+  color green
+  font-weight bold
+  background-color rgba(255,255,255,.9)
+  position fixed
+  left 0
+  bottom 0
+  padding 10px
+  z-index 2000
+  
     
     
